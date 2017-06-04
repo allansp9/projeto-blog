@@ -57,6 +57,8 @@
 		    	}
 		    
 		        $this->post_model->create_post($post_image);
+		        $this->session->set_flashdata('post_created', 'Post feito com sucesso!');
+		        
 		        redirect('posts');
 		    }
 		    
@@ -64,6 +66,9 @@
 		
 		public function delete($id){
 		    $this->post_model->delete_post($id);
+		    
+		    $this->session->set_flashdata('post_deleted', 'Post deletado com sucesso!');
+		    
 		    redirect('posts');
 		    
 		}
@@ -86,6 +91,8 @@
 		
 		public function update(){
 		    $this->post_model->update_post();
+		    $this->session->set_flashdata('post_updated', 'Post atualizado com sucesso!');
+		    
 		    redirect('posts');
 		}
 	}
