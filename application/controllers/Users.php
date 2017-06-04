@@ -41,7 +41,7 @@
                 $username = $this->input->post('username');
                 $password = md5($this->input->post('password'));
                 
-                $user_id = $this->user_model->login($username, $password);
+                $user_id = $this->user_model->login($username, $password); //vai armazenar a id do usuario ou false
                 
                 if($user_id){
                     
@@ -51,7 +51,7 @@
                       'logged_in' => true
                     );
                     
-                    $this->session->set_userdata($user_data);
+                    $this->session->set_userdata($user_data); //coloca os dados do usuario na session
                     
                     redirect('home');
                     

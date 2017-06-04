@@ -5,22 +5,6 @@
             $this->load->database();
         }
         
-        public function get_posts($slug = FALSE, $limit = FALSE, $offset = FALSE){
-            if($limit){
-                $this->db->limit($limit, $offset);
-            }
-            
-            if($slug === FALSE){
-                $this->db->order_by('posts.id', 'DESC');
-                $this->db->join('categories','categories.id = posts.category_id');
-                $query = $this->db->get('posts');
-                return $query->result_array();
-            }
-            
-            $query = $this->db->get_where('posts', array('slug' => $slug));
-            return $query->row_array();
-        }
-        
         public function create_post($post_image){
             $slug = url_title($this->input->post('title'));
             
@@ -36,12 +20,6 @@
             return $this->db->insert('posts', $data);
         }
         
-        public function delete_post($id){
-            $this->db->where('id', $id);
-            $this->db->delete('posts');
-            return true;
-        }
-        
         public function update_post(){
             $slug = url_title($this->input->post('title'));
             
@@ -54,6 +32,37 @@
             
             $this->db->where('id', $this->input->post('id'));
             return $this->db->update('posts', $data);
+        }
+        
+        public function delete_post($id){
+            $this->db->where('id', $id);
+            $this->db->delete('posts');
+            return true;
+        }        
+        
+        public function get_posts($slug = FALSE){
+            if($slug === FALSE){
+                $this->db->order_by('posts.id', 'DESC');
+                $this->db->join('categories','categories.id = posts.category_id');
+                $query = $this->db->get('posts');
+                return $query->result_array();
+            }
+            
+            $query = $this->db->get_where('posts', array('slug' => $slug));
+            return $query->row_array();
+        }
+        
+        public function get_my_posts($slug = FALSE, $user_id){
+            if($slug === FALSE){
+                $this->db->where('user_id', $user_id);
+                $this->db->order_by('posts.id', 'DESC');
+                $this->db->join('categories','categories.id = posts.category_id');
+                $query = $this->db->get('posts');
+                return $query->result_array();
+            }
+            
+            $query = $this->db->get_where('posts', array('user_id' => $user_id, 'slug' => $slug));
+            return $query->row_array();
         }
         
         public function get_categories(){

@@ -16,10 +16,10 @@
             $this->db->where('username', $username);
             $this->db->where('password', $password);
             
-            $result = $this->db->get('users');
+            $result = $this->db->get('users'); //mesma coisa que get users where username and password
             
-            if($result->num_rows() == 1){
-                return $result->row(0)->id;
+            if($result->num_rows() == 1){ //se retornar 1 é porque o usuario existe no banco
+                return $result->row(0)->id; // retorna a id do usuario
             }else {
                 return false;
             }

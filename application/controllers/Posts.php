@@ -1,23 +1,30 @@
 <?php
 	class Posts extends CI_Controller{
-		public function index($offset = 0){
+		public function index(){
 			
-			//paginação
-			$config['base_url'] = base_url().'posts/index/';
-			$config['total_rows'] = $this->db->count_all('posts');
-			$config['per_page'] = 3;
-			$config['uri_segment'] = 3;
-			$config['attributes'] = array('class' => 'pagination-link');
-			$this->pagination->initialize($config);
-			//
 			$data['title'] = 'latest posts';
 			
-			$data['posts'] = $this->post_model->get_posts(FALSE, $config['per_page'], $offset);
+			$data['posts'] = $this->post_model->get_posts(FALSE); 
 			
 			$this->load->view('includes/header');
 			$this->load->view('posts/index', $data);
 			$this->load->view('includes/footer');
 		}
+		
+		public function myposts(){
+			
+			$user_id = $this->session->userdata('user_id');
+			
+			$data['title'] = 'My posts';
+			
+			$data['posts'] = $this->post_model->get_my_posts(FALSE, $user_id);
+			
+			$this->load->view('includes/header');
+			$this->load->view('posts/myposts', $data);
+			$this->load->view('includes/footer');
+		}
+		
+		
 		
 		public function view($slug = NULL){
 		    $data['post'] = $this->post_model->get_posts($slug);
@@ -98,7 +105,7 @@
 			
 		   $data['post'] = $this->post_model->get_posts($slug);
 		   
-		   if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){
+		   if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
 		   		redirect('posts');
 		   }
 		   
@@ -118,7 +125,6 @@
 		public function update(){
 			if(!$this->session->userdata('logged_in')){
 				redirect('users/login');
-				
 			}
 			
 		    $this->post_model->update_post();

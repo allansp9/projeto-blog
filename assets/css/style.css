@@ -10,21 +10,6 @@
     height: auto;
 }
 
-.pagination-links{
-    margin:30px 0;
-}
-
-.pagination-links strong{
-    padding: 8px 13px;
-    margin: 5px;
-    background:#f9f9f9;
-    border: 1px #ccc solid;
-    color: black;
-}
-
-a.pagination-link{
-    padding: 8px 13px;
-    margin: 5px;
-    background:#f9f9f9;
-    border: 1px #ccc solid;
+.footer{
+    height:200px;
 }

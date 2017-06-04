@@ -15,9 +15,9 @@
         <div id="navbar">
           <ul class="nav navbar-nav">
             <li><a href="<?php echo base_url(); ?>home">Home</a></li>
-            <li><a href="<?php echo base_url(); ?>about">About</a></li>
+            <li><a href="<?php echo base_url(); ?>about">Sobre</a></li>
              <li><a href="<?php echo base_url(); ?>posts">Blog</a></li>
-             <li><a href="<?php echo base_url(); ?>categories">Categories</a></li>
+             <li><a href="<?php echo base_url(); ?>categories">Categorias</a></li>
           </ul>
           
           <ul class="nav navbar-nav navbar-right">
@@ -27,6 +27,7 @@
           <?php endif; ?>
           
           <?php if($this->session->userdata('logged_in')) : ?>
+            <li><a href="<?php echo base_url(); ?>posts/myposts">Meus Posts</a></li>
             <li><a href="<?php echo base_url(); ?>posts/create">Criar Post</a></li>
             <li><a href="<?php echo base_url(); ?>users/logout">Sair</a></li>
           <?php endif; ?> 
