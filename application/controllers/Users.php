@@ -25,6 +25,44 @@
             
         }
         
+        public function login(){
+            $data['title'] = 'Entrar';
+            
+            $this->form_validation->set_rules('username', 'Usuário', 'required');
+            $this->form_validation->set_rules('password', 'Senha', 'required');
+            
+            
+            if ($this->form_validation->run() === FALSE) {
+                $this->load->view('includes/header');
+                $this->load->view('users/login', $data);
+                $this->load->view('includes/footer');
+            } else {
+                
+                $username = $this->input->post('username');
+                $password = md5($this->input->post('password'));
+                
+                $user_id = $this->user_model->login($username, $password);
+                
+                if($user_id){
+                    
+                    $user_data = array(
+                      'user_id' => $user_id,
+                      'username' => $username,
+                      'logged_in' => true
+                    );
+                    
+                    $this->session->set_userdata($user_data);
+                    
+                    redirect('posts');
+                    
+                }else{
+                    $this->session->set_flashdata('login_failed', 'Usuário ou Senha incorretos'); 
+                }
+                 redirect('users/login');
+            }
+            
+        }
+        
         public function check_username_exists($username){
             $this->form_validation->set_message('check_username_exists', 'Nome de usuário já cadastrado. Escolha outro.');
             
