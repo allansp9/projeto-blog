@@ -48,4 +48,23 @@
 		    redirect('posts');
 		    
 		}
+		
+		public function edit($slug){
+		   $data['post'] = $this->post_model->get_posts($slug);
+		    
+		    if(empty($data['post'])){
+		        show_404();
+		    }
+		    
+		    $data['title'] = 'Edit Post';
+		    
+		    $this->load->view('includes/header');
+			$this->load->view('posts/edit', $data);
+			$this->load->view('includes/footer'); 
+		}
+		
+		public function update(){
+		    $this->post_model->update_post();
+		    redirect('posts');
+		}
 	}
