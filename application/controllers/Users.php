@@ -20,7 +20,7 @@
                 
                 $this->session->set_flashdata('user_registered', 'Cadastro efetuado com sucesso!');
                 
-                redirect('posts');
+                redirect('home');
             }
             
         }
@@ -53,7 +53,7 @@
                     
                     $this->session->set_userdata($user_data);
                     
-                    redirect('posts');
+                    redirect('home');
                     
                 }else{
                     $this->session->set_flashdata('login_failed', 'Usuário ou Senha incorretos'); 
@@ -61,6 +61,14 @@
                  redirect('users/login');
             }
             
+        }
+        
+        public function logout(){
+            $this->session->unset_userdata('logged_in');
+            $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('username');
+            
+            redirect('home');
         }
         
         public function check_username_exists($username){

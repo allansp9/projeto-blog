@@ -24,7 +24,9 @@
             
             <li><a href="<?php echo base_url(); ?>users/login">Entrar</a></li>
             <li><a href="<?php echo base_url(); ?>users/register">Cadastre-se</a></li>            
-            <li><a href="<?php echo base_url(); ?>posts/create">Criar Post</a></li>  
+            <li><a href="<?php echo base_url(); ?>posts/create">Criar Post</a></li>
+            
+            <li><a href="<?php echo base_url(); ?>users/logout">Sair</a></li>
             
           </ul>
         </div>
