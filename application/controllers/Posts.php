@@ -3,7 +3,7 @@
 		public function index(){
 			
 			$data['title'] = 'latest posts';
-			
+			$data['categories'] = $this->category_model->get_categories();
 			$data['posts'] = $this->post_model->get_posts(FALSE); 
 			
 			$this->load->view('includes/header');
