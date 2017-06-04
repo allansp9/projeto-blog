@@ -4,6 +4,7 @@
     <title>ciBlog</title>
     <link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+    <script src="https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -16,18 +17,12 @@
             <li><a href="<?php echo base_url(); ?>home">Home</a></li>
             <li><a href="<?php echo base_url(); ?>about">About</a></li>
              <li><a href="<?php echo base_url(); ?>posts">Blog</a></li>
-             <li><a href="categories">Categories</a></li>
           </ul>
+          
           <ul class="nav navbar-nav navbar-right">
-          
-            <li><a href="users/login">Login</a></li>
-            <li><a href="users/register">Register</a></li>
-          
-          
-            <li><a href="posts/create">Create Post</a></li>
-            <li><a href="categories/create">Create Category</a></li>
-            <li><a href="users/logout">Logout</a></li>
-
+            
+            <li><a href="<?php echo base_url(); ?>posts/create">Criar Post</a></li> 
+            
           </ul>
         </div>
       </div>

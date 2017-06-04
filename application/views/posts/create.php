@@ -7,7 +7,7 @@
   </div>
   <div class="form-group">
     <label>Body</label>
-    <textarea class="form-control" id="" name="body" placeholder="Adicionar conteudo"></textarea>
+    <textarea class="form-control" id="editor1" name="body" placeholder="Adicionar conteudo"></textarea>
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
