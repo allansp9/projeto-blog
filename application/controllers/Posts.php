@@ -28,6 +28,8 @@
 		public function create(){
 		    $data['title'] = 'create post';
 		    
+		    $data['categories'] = $this->post_model->get_categories();
+		    
 		    $this->form_validation->set_rules('title', 'Título', 'required');
 		    $this->form_validation->set_rules('body', 'Corpo', 'required');
 		    
