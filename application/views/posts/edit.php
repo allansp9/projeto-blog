@@ -10,5 +10,13 @@
     <label>Body</label>
     <textarea class="form-control" id="editor1" name="body" placeholder="Adicionar conteudo"><?php echo $post['body']; ?></textarea>
   </div>
+  <div class="form-group">
+    <label>Categoria</label>
+    <select name="category_id" class="form-control" id="">
+      <?php foreach($categories as $category): ?>
+        <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+      <?php endforeach; ?>
+    </select>
+  </div>
   <button type="submit" class="btn btn-default">Salvar</button>
 </form>
