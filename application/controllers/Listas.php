@@ -1,13 +1,13 @@
 <?php
-    class Categories extends CI_Controller{
+    class Listas extends CI_Controller{
         
         public function index(){
-            $data['title'] = 'Categorias';
+            $data['title'] = 'Minhas Listas';
             $user_id = $this->session->userdata('user_id');
-            $data['categories'] = $this->category_model->get_categories($user_id);
+            $data['listas'] = $this->lista_model->get_listas($user_id);
             
             $this->load->view('includes/header');
-            $this->load->view('categories/index', $data);
+            $this->load->view('listas/index', $data);
             $this->load->view('includes/footer');
         }
         
@@ -22,12 +22,12 @@
             
             if($this->form_validation->run() === FALSE){
                 $this->load->view('includes/header');
-                $this->load->view('categories/create', $data);
+                $this->load->view('listas/create', $data);
                 $this->load->view('includes/footer');
             }
             else{
-                $this->category_model->create_category();
-                redirect('categories');
+                $this->lista_model->create_lista();
+                redirect('listas');
             }
         }
         
@@ -36,22 +36,22 @@
 				redirect('users/login');
 				
 			}
-		    $this->category_model->delete_category($id);
+		    $this->lista_model->delete_lista($id);
 		    
-		    redirect('categories');
+		    redirect('listas');
 		    
 		}
         
-        public function posts($id){
-            if($this->session->userdata('user_id') != $this->category_model->get_category($id)->user_id){
-				redirect('posts');
+        public function filmes($id){
+            if($this->session->userdata('user_id') != $this->lista_model->get_lista($id)->user_id){
+				redirect('filmes');
 			}
-            $data['title'] = $this->category_model->get_category($id)->list_name;
+            $data['title'] = $this->lista_model->get_lista($id)->name;
             
-            $data['posts'] = $this->post_model->get_posts_by_category($id);
+            $data['filmes'] = $this->filme_model->get_filmes_by_lista($id);
             
             $this->load->view('includes/header');
-            $this->load->view('posts/index', $data);
+            $this->load->view('filmes/index', $data);
             $this->load->view('includes/footer');
         }
     }

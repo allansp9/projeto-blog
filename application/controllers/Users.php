@@ -19,8 +19,8 @@
                 $this->user_model->register($enc_password);
                 
                 $this->session->set_flashdata('user_registered', 'Cadastro efetuado com sucesso!');
-                
-                redirect('home');
+                    
+                    redirect('filmes');
             }
             
         }
@@ -53,7 +53,7 @@
                     
                     $this->session->set_userdata($user_data); //coloca os dados do usuario na session
                     
-                    redirect('home');
+                    redirect('filmes');
                     
                 }else{
                     $this->session->set_flashdata('login_failed', 'Usuário ou Senha incorretos'); 
@@ -68,7 +68,7 @@
             $this->session->unset_userdata('user_id');
             $this->session->unset_userdata('username');
             
-            redirect('home');
+            redirect('filmes');
         }
         
         public function check_username_exists($username){

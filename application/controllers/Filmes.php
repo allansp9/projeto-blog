@@ -1,29 +1,28 @@
 <?php
-	class Posts extends CI_Controller{
+	class Filmes extends CI_Controller{
 		public function index(){
 			
 			$data['title'] = 'Atividade recente';
-			// $data['categories'] = $this->post_model->get_categories(FALSE);
-			$data['posts'] = $this->post_model->get_posts(FALSE); 
+			$data['filmes'] = $this->filme_model->get_filmes(FALSE); 
 			
 			$this->load->view('includes/header');
-			$this->load->view('posts/index', $data);
+			$this->load->view('filmes/index', $data);
 			$this->load->view('includes/footer');
 		}
 
 		public function view($slug = NULL){
-		    $data['post'] = $this->post_model->get_posts($slug);
-		    $post_id = $data['post']['id'];
-		    $data['comments'] = $this->comment_model->get_comments($post_id);
+		    $data['filme'] = $this->filme_model->get_filmes($slug);
+		    $filme_id = $data['filme']['id'];
+		    $data['comments'] = $this->comment_model->get_comments($filme_id);
 		    
-		    if(empty($data['post'])){
+		    if(empty($data['filme'])){
 		        show_404();
 		    }
 		    
-		    $data['title'] = $data['post']['title'];
+		    $data['title'] = $data['filme']['title'];
 		    
 		    $this->load->view('includes/header');
-			$this->load->view('posts/view', $data);
+			$this->load->view('filmes/view', $data);
 			$this->load->view('includes/footer');
 		}
 		
@@ -36,19 +35,19 @@
 			$user_id = $this->session->userdata('user_id');
 		    $data['title'] = 'Adicionar filme';
 		    
-		    $data['categories'] = $this->post_model->get_categories($user_id);
+		    $data['listas'] = $this->filme_model->get_listas($user_id);
 		    
 		    $this->form_validation->set_rules('title', 'Título', 'required');
 		    $this->form_validation->set_rules('body', 'Corpo', 'required');
 		    
 		    if($this->form_validation->run() === FALSE){
 		        $this->load->view('includes/header');
-			    $this->load->view('posts/create', $data);
+			    $this->load->view('filmes/create', $data);
 			    $this->load->view('includes/footer'); 
 		        
 		    }else{
 		    	//enviar imagem
-		    	$config['upload_path'] = './assets/images/posts';
+		    	$config['upload_path'] = './assets/images/filmes';
 		    	$config['allowed_types'] = 'gif|jpg|png';
 		    	$config['max_size'] = '2048';
 		    	$config['max_width'] = '3000';
@@ -58,16 +57,16 @@
 		    	
 		    	if (!$this->upload->do_upload()) {
 		    		$errors = array('error' => $this->upload->display_errors());
-		    		$post_image = 'noimage.jpg';
+		    		$filme_image = 'noimage.jpg';
 		    	} else {
 		    		$data = array('upload_data' => $this->upload->data());
-		    		$post_image = $_FILES['userfile']['name'];
+		    		$filme_image = $_FILES['userfile']['name'];
 		    	}
 		    
-		        $this->post_model->create_post($post_image);
-		        $this->session->set_flashdata('post_created', 'Filme adicionado com sucesso!');
+		        $this->filme_model->create_filme($filme_image);
+		        $this->session->set_flashdata('filme_created', 'Filme adicionado com sucesso!');
 		        
-		        redirect('posts');
+		        redirect('filmes');
 		    }
 		    
 		}
@@ -77,11 +76,11 @@
 				redirect('users/login');
 				
 			}
-		    $this->post_model->delete_post($id);
+		    $this->filme_model->delete_filme($id);
 		    
-		    $this->session->set_flashdata('post_deleted', 'Post deletado com sucesso!');
+		    $this->session->set_flashdata('filme_deleted', 'Filme deletado com sucesso!');
 		    
-		    redirect('posts');
+		    redirect('filmes');
 		    
 		}
 		
@@ -91,22 +90,23 @@
 				
 			}
 			
-			$data['post'] = $this->post_model->get_posts($slug);
+			$data['filme'] = $this->filme_model->get_filmes($slug);
 		   
-		  if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
-		  		redirect('posts');
+		  if($this->session->userdata('user_id') != $this->filme_model->get_filmes($slug)['user_id']){ //se o usuario tentando editar um filme não for o mesmo que o criou
+		  		redirect('filmes');
 		  }
-		   
-		  $data['categories'] = $this->post_model->get_categories(FALSE);
+		  
+		  $user_id = $this->session->userdata('user_id'); 
+		  $data['listas'] = $this->filme_model->get_listas($user_id);
 		    
-		    if(empty($data['post'])){
+		    if(empty($data['filme'])){
 		        show_404();
 		    }
 		    
-		    $data['title'] = 'Edit Post';
+		    $data['title'] = 'Edit filme';
 		    
 		    $this->load->view('includes/header');
-			$this->load->view('posts/edit', $data);
+			$this->load->view('filmes/edit', $data);
 			$this->load->view('includes/footer'); 
 		}
 		
@@ -115,9 +115,9 @@
 				redirect('users/login');
 			}
 			
-		    $this->post_model->update_post();
-		    $this->session->set_flashdata('post_updated', 'Filme atualizado com sucesso!');
+		    $this->filme_model->update_filme();
+		    $this->session->set_flashdata('filme_updated', 'Filme atualizado com sucesso!');
 		    
-		    redirect('posts');
+		    redirect('filmes');
 		}
 	}

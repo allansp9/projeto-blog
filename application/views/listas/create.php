@@ -2,7 +2,7 @@
 
 <?php echo validation_errors(); ?>
 
-<?php echo form_open_multipart('categories/create'); ?>
+<?php echo form_open_multipart('listas/create'); ?>
     
     <div class="form-group">
         <labe>Nome</labe>
