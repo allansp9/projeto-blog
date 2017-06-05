@@ -93,11 +93,11 @@
 			
 			$data['post'] = $this->post_model->get_posts($slug);
 		   
-		   if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
-		   		redirect('posts');
-		   }
+		  if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
+		  		redirect('posts');
+		  }
 		   
-		   $data['categories'] = $this->post_model->get_categories(FALSE);
+		  $data['categories'] = $this->post_model->get_categories(FALSE);
 		    
 		    if(empty($data['post'])){
 		        show_404();

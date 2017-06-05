@@ -4,7 +4,7 @@
     <title>ciBlog</title>
     <link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
-    <script src="https://cdn.ckeditor.com/4.7.0/standard/ckeditor.js"></script>
+    <script src="http://cdn.ckeditor.com/4.7.0/standard/ckeditor.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
