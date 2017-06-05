@@ -1,6 +1,7 @@
 <h2><?= $title ?></h2>
 <?php foreach($posts as $post) : ?>
     <h3><?php echo $post['title']; ?></h3>
+    <small>Adicionado por: <?php echo $post['name']; ?></small>
     <div class="row">
         <div class="col-md-3">
             <img class="post-thumb" src="<?php echo site_url(); ?>assets/images/posts/<?php echo $post['post_image']; ?>">   

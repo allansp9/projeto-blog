@@ -13,3 +13,7 @@
 .footer{
     height:200px;
 }
+
+.cat-delete{
+    display:inline;
+}

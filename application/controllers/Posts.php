@@ -3,7 +3,7 @@
 		public function index(){
 			
 			$data['title'] = 'latest posts';
-			$data['categories'] = $this->post_model->get_categories();
+			// $data['categories'] = $this->post_model->get_categories(FALSE);
 			$data['posts'] = $this->post_model->get_posts(FALSE); 
 			
 			$this->load->view('includes/header');
@@ -46,9 +46,10 @@
 				redirect('users/login');
 				
 			}
+			$user_id = $this->session->userdata('user_id');
 		    $data['title'] = 'create post';
 		    
-		    $data['categories'] = $this->post_model->get_categories();
+		    $data['categories'] = $this->post_model->get_categories($user_id);
 		    
 		    $this->form_validation->set_rules('title', 'Título', 'required');
 		    $this->form_validation->set_rules('body', 'Corpo', 'required');
@@ -102,14 +103,14 @@
 				redirect('users/login');
 				
 			}
-			
-		   $data['post'] = $this->post_model->get_posts($slug);
+			$user_id = $this->session->userdata('user_id');	
+			$data['post'] = $this->post_model->get_posts($slug);
 		   
 		   if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
 		   		redirect('posts');
 		   }
 		   
-		   $data['categories'] = $this->post_model->get_categories();
+		   $data['categories'] = $this->post_model->get_categories($user_id);
 		    
 		    if(empty($data['post'])){
 		        show_404();
