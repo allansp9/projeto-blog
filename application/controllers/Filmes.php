@@ -1,6 +1,10 @@
 <?php
 	class Filmes extends CI_Controller{
-		public function index(){
+		public function index($page = 'index'){
+			
+			if(!file_exists(APPPATH.'views/filmes/'.$page.'.php')){
+				show_404();
+			}
 			
 			$data['title'] = 'Atividade recente';
 			$data['filmes'] = $this->filme_model->get_filmes(FALSE); 
