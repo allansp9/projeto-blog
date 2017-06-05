@@ -46,4 +46,10 @@
                 return false;
             }
         }
+        
+        public function get_name($id){
+            $query = $this->db->get_where('users', array('id' => $id));
+            
+            return $query->row();
+        }
     }

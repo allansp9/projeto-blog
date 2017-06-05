@@ -43,25 +43,11 @@
         public function get_posts($slug = FALSE){
             if($slug === FALSE){
                 $this->db->order_by('posts.id', 'DESC');
-                $this->db->join('categories','categories.id = posts.category_id');
                 $query = $this->db->get('posts');
                 return $query->result_array();
             }
             
             $query = $this->db->get_where('posts', array('slug' => $slug));
-            return $query->row_array();
-        }
-        
-        public function get_my_posts($slug = FALSE, $user_id){
-            if($slug === FALSE){
-                $this->db->where('user_id', $user_id);
-                $this->db->order_by('posts.id', 'DESC');
-                $this->db->join('categories','categories.id = posts.category_id');
-                $query = $this->db->get('posts');
-                return $query->result_array();
-            }
-            
-            $query = $this->db->get_where('posts', array('user_id' => $user_id, 'slug' => $slug));
             return $query->row_array();
         }
         

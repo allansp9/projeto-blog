@@ -6,10 +6,9 @@
             <img class="post-thumb" src="<?php echo site_url(); ?>assets/images/posts/<?php echo $post['post_image']; ?>">   
         </div>
         <div class="col-md-9">
-            <small class="post-date">Postado em: <?php echo $post['created_at']; ?> em <strong><?php echo $post['name']; ?></strong></small><br>
             <?php echo word_limiter($post['body'], 50); ?>
             <br><br>
-            <p><a href="<?php echo site_url('/posts/'.$post['slug']); ?>">Read More</a></p>    
+            <p><a href="<?php echo site_url('/posts/'.$post['slug']); ?>">Leia mais...</a></p>    
         </div>
     </div>
 <?php endforeach; ?>
