@@ -2,7 +2,7 @@
 	class Posts extends CI_Controller{
 		public function index(){
 			
-			$data['title'] = 'latest posts';
+			$data['title'] = 'Atividade recente';
 			// $data['categories'] = $this->post_model->get_categories(FALSE);
 			$data['posts'] = $this->post_model->get_posts(FALSE); 
 			
@@ -32,7 +32,7 @@
 				
 			}
 			$user_id = $this->session->userdata('user_id');
-		    $data['title'] = 'create post';
+		    $data['title'] = 'Adicionar filme';
 		    
 		    $data['categories'] = $this->post_model->get_categories($user_id);
 		    
@@ -49,8 +49,8 @@
 		    	$config['upload_path'] = './assets/images/posts';
 		    	$config['allowed_types'] = 'gif|jpg|png';
 		    	$config['max_size'] = '2048';
-		    	$config['max_width'] = '2000';
-		    	$config['max_height'] = '2000';
+		    	$config['max_width'] = '3000';
+		    	$config['max_height'] = '3000';
 		    	
 		    	$this->load->library('upload', $config);
 		    	
@@ -63,7 +63,7 @@
 		    	}
 		    
 		        $this->post_model->create_post($post_image);
-		        $this->session->set_flashdata('post_created', 'Post feito com sucesso!');
+		        $this->session->set_flashdata('post_created', 'Filme adicionado com sucesso!');
 		        
 		        redirect('posts');
 		    }
@@ -88,14 +88,14 @@
 				redirect('users/login');
 				
 			}
-			$user_id = $this->session->userdata('user_id');	
+			
 			$data['post'] = $this->post_model->get_posts($slug);
 		   
-		   if($this->session->userdata('user_id') != $this->category_model->get_categories($user_id)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
+		   if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
 		   		redirect('posts');
 		   }
 		   
-		   $data['categories'] = $this->post_model->get_categories($user_id);
+		   $data['categories'] = $this->post_model->get_categories(FALSE);
 		    
 		    if(empty($data['post'])){
 		        show_404();
@@ -114,7 +114,7 @@
 			}
 			
 		    $this->post_model->update_post();
-		    $this->session->set_flashdata('post_updated', 'Post atualizado com sucesso!');
+		    $this->session->set_flashdata('post_updated', 'Filme atualizado com sucesso!');
 		    
 		    redirect('posts');
 		}

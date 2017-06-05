@@ -12,8 +12,8 @@
             return $this->db->insert('categories', $data);
         }
         public function get_categories($user_id){
-            $this->db->order_by('name');
-            $query = $this->db->get_where('categories', array('user_id' => $user_id,));
+            $this->db->order_by('list_name');
+            $query = $this->db->get_where('categories', array('user_id' => $user_id));
             return $query->result_array();
         }
         

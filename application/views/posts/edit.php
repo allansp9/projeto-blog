@@ -18,5 +18,10 @@
       <?php endforeach; ?>
     </select>
   </div>
+  <div class="form-group">
+    <label>Enviar Imagem</label>
+    <input type="file" name="userfile" size="20">
+    
+  </div>
   <button type="submit" class="btn btn-default">Salvar</button>
 </form>

@@ -6,8 +6,9 @@
 }
 
 .post-thumb{
-    width:100%;
-    height: auto;
+    width:236px;
+    height: 358px;
+    margin:auto;
 }
 
 .footer{
@@ -16,4 +17,9 @@
 
 .cat-delete{
     display:inline;
+}
+
+.poster{
+    max-width:472px;
+    max-height:716px;
 }
