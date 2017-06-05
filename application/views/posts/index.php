@@ -1,15 +1,15 @@
 <h2><?= $title ?></h2>
-<?php foreach($posts as $post) : ?>
-    <h3><?php echo $post['title']; ?></h3>
-    <small>Adicionado por: <?php echo $post['name']; ?></small>
-    <div class="row">
+<div class="row">
+    <?php foreach($posts as $post) : ?>
         <div class="col-md-3">
-            <img class="post-thumb" src="<?php echo site_url(); ?>assets/images/posts/<?php echo $post['post_image']; ?>">   
+            <div class="thumbnail">
+                <img class="post-thumb" src="<?php echo site_url(); ?>assets/images/posts/<?php echo $post['post_image']; ?>" alt="<?php echo $post['title']; ?>">
+                <div class="caption">
+                    <a href="<?php echo site_url('/posts/'.$post['slug']); ?>"><h3><?php echo $post['title']; ?></h3></a><br>
+                    <small>Adicionado por: <?php echo $post['name']; ?></small>
+                </div>
+            </div>
         </div>
-        <div class="col-md-9">
-            <?php echo word_limiter($post['body'], 50); ?>
-            <br><br>
-            <p><a href="<?php echo site_url('/posts/'.$post['slug']); ?>">Leia mais...</a></p>    
-        </div>
-    </div>
-<?php endforeach; ?>
+
+    <?php endforeach; ?>
+</div>
