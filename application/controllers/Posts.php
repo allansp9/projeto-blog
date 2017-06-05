@@ -10,22 +10,7 @@
 			$this->load->view('posts/index', $data);
 			$this->load->view('includes/footer');
 		}
-		
-		public function myposts(){
-			
-			$user_id = $this->session->userdata('user_id');
-			
-			$data['title'] = 'My posts';
-			
-			$data['posts'] = $this->post_model->get_my_posts(FALSE, $user_id);
-			
-			$this->load->view('includes/header');
-			$this->load->view('posts/myposts', $data);
-			$this->load->view('includes/footer');
-		}
-		
-		
-		
+
 		public function view($slug = NULL){
 		    $data['post'] = $this->post_model->get_posts($slug);
 		    
@@ -106,7 +91,7 @@
 			$user_id = $this->session->userdata('user_id');	
 			$data['post'] = $this->post_model->get_posts($slug);
 		   
-		   if($this->session->userdata('user_id') != $this->post_model->get_posts($slug)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
+		   if($this->session->userdata('user_id') != $this->category_model->get_categories($user_id)['user_id']){ //se o usuario tentando editar um post não for o mesmo que o criou
 		   		redirect('posts');
 		   }
 		   

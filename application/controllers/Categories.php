@@ -43,6 +43,9 @@
 		}
         
         public function posts($id){
+            if($this->session->userdata('user_id') != $this->category_model->get_category($id)->user_id){
+				redirect('posts');
+			}
             $data['title'] = $this->category_model->get_category($id)->name;
             
             $data['posts'] = $this->post_model->get_posts_by_category($id);
