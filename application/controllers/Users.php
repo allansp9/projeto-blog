@@ -17,7 +17,6 @@
                 $enc_password = md5($this->input->post('password'));
                 
                 $this->user_model->register($enc_password);
-                
                 $this->session->set_flashdata('user_registered', 'Cadastro efetuado com sucesso!');
                     
                     redirect('filmes');

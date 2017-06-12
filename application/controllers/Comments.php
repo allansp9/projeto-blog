@@ -7,9 +7,7 @@
 			$this->form_validation->set_rules('email', 'Email', 'required');
 			$this->form_validation->set_rules('body', 'Body', 'required');
 			if($this->form_validation->run() === FALSE){
-				$this->load->view('includes/header');
-				$this->load->view('filmes/view', $data);
-				$this->load->view('includes/footer');
+				redirect('filmes/'.$slug);
 			} else {
 				$this->comment_model->create_comment($filme_id);
 				redirect('filmes/'.$slug);

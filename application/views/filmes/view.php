@@ -55,7 +55,7 @@
                 <label>Comentário</label>
                 <textarea name="body" class="form-control"></textarea>
             </div>
-            <input type="hidden" name="slug" value="<?php echo $filme['slug']; ?>"/>
+            <input type="hidden" name="slug" value="<?php echo $filme['slug']; ?>">
             <button type="submit" class="btn btn-primary btn-block">Enviar</button>
     </div>
 </div>
